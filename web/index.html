@@ -31,7 +31,24 @@
 
   <title>movie_recommendation_app</title>
   <link rel="manifest" href="manifest.json">
+  <script type="module">
+    import { initializeApp } from "firebase/app";
+    import { getAnalytics } from "firebase/analytics";
 
+    const firebaseConfig = {
+      apiKey: "AIzaSyBYZ-Ii8f9DxlpTez2h-_KOiC1LlMQSFPg",
+      authDomain: "moviefeedapp.firebaseapp.com",
+      projectId: "moviefeedapp",
+      storageBucket: "moviefeedapp.appspot.com",
+      messagingSenderId: "548119300880",
+      appId: "1:548119300880:web:53a9ff2df469169a2c3395",
+      measurementId: "G-R8FSWJ0GNL"
+    };
+    
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    </script>
   <script>
     // The value below is injected by flutter build, do not touch.
     const serviceWorkerVersion = null;
