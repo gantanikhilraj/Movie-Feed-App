@@ -13,11 +13,11 @@ class TrendingMovies extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Trending movies", style: TextStyle(color: Colors.white)),
+          const Text("Trending movies", style: TextStyle(color: Colors.white)),
           const SizedBox(
             height: 10,
           ),
-          Container(
+          SizedBox(
             height: 270,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -32,8 +32,10 @@ class TrendingMovies extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) => Description(
                                 name: trending[index]['title'],
+                                // ignore: prefer_interpolation_to_compose_strings
                                 bannerUrl: 'https://image.tmdb.org/t/p/w500' +
                                     trending[index]['backdrop_path'],
+                                // ignore: prefer_interpolation_to_compose_strings
                                 posterUrl: 'https://image.tmdb.org/t/p/w500' +
                                     trending[index]['poster_path'],
                                 description: trending[index]['overview'],
@@ -46,7 +48,7 @@ class TrendingMovies extends StatelessWidget {
                         : const SizedBox.shrink();
                   },
                   child: trending[index] != null
-                      ? Container(
+                      ? SizedBox(
                           width: 140,
                           child: Column(
                             children: [
@@ -56,8 +58,10 @@ class TrendingMovies extends StatelessWidget {
                                   image: DecorationImage(
                                     image: NetworkImage(
                                       trending[index]['title'] != null
+                                          // ignore: prefer_interpolation_to_compose_strings
                                           ? 'https://image.tmdb.org/t/p/w500' +
                                               trending[index]['poster_path']
+                                          // ignore: prefer_interpolation_to_compose_strings
                                           : 'https://image.tmdb.org/t/p/w500' +
                                               trending[index]['poster_path'],
                                     ),
@@ -67,18 +71,14 @@ class TrendingMovies extends StatelessWidget {
                               const SizedBox(
                                 height: 5,
                               ),
-                              Container(
-                                child: Text(
-                                  trending[index]['title'] != null
-                                      ? trending[index]['title']
-                                      : "Loading",
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  textAlign: TextAlign.center,
+                              Text(
+                                trending[index]['title'] ?? "Loading",
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
                                 ),
+                                textAlign: TextAlign.center,
                               ),
                             ],
                           ),

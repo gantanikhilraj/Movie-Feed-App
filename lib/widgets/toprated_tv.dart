@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TopratedTv extends StatelessWidget {
-  final List Tv;
-  const TopratedTv({super.key, required this.Tv});
+  final List tv;
+  const TopratedTv({super.key, required this.tv});
 
   @override
   Widget build(BuildContext context) {
@@ -11,18 +11,18 @@ class TopratedTv extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Popular TV Shows",
             style: TextStyle(color: Colors.white),
           ),
           const SizedBox(
             height: 10,
           ),
-          Container(
+          SizedBox(
             height: 200,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: Tv.length,
+              itemCount: tv.length,
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
@@ -41,8 +41,9 @@ class TopratedTv extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                             image: DecorationImage(
                                 image: NetworkImage(
+                                  // ignore: prefer_interpolation_to_compose_strings
                                   'https://image.tmdb.org/t/p/w500' +
-                                      Tv[index]['backdrop_path'],
+                                      tv[index]['backdrop_path'],
                                 ),
                                 fit: BoxFit.cover),
                           ),
@@ -50,18 +51,14 @@ class TopratedTv extends StatelessWidget {
                         const SizedBox(
                           height: 5,
                         ),
-                        Container(
-                          child: Text(
-                            Tv[index]['original_name'] != null
-                                ? Tv[index]['original_name']
-                                : "Loading",
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.center,
+                        Text(
+                          tv[index]['original_name'] ?? "Loading",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                       ],
                     ),

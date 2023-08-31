@@ -16,7 +16,7 @@ class TopratedMovies extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Container(
+          SizedBox(
             height: 270,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -30,8 +30,10 @@ class TopratedMovies extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) => Description(
                           name: topRated[index]['title'],
+                          // ignore: prefer_interpolation_to_compose_strings
                           bannerUrl: 'https://image.tmdb.org/t/p/w500' +
                               topRated[index]['backdrop_path'],
+                          // ignore: prefer_interpolation_to_compose_strings
                           posterUrl: 'https://image.tmdb.org/t/p/w500' +
                               topRated[index]['poster_path'],
                           description: topRated[index]['overview'],
@@ -41,7 +43,7 @@ class TopratedMovies extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Container(
+                  child: SizedBox(
                     width: 140,
                     child: Column(
                       children: [
@@ -51,6 +53,7 @@ class TopratedMovies extends StatelessWidget {
                             image: DecorationImage(
                               image: NetworkImage(
                                 topRated[index]['title'] != null
+                                    // ignore: prefer_interpolation_to_compose_strings
                                     ? 'https://image.tmdb.org/t/p/w500' +
                                         topRated[index]['poster_path']
                                     : 'https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg',
@@ -63,18 +66,14 @@ class TopratedMovies extends StatelessWidget {
                         const SizedBox(
                           height: 5,
                         ),
-                        Container(
-                          child: Text(
-                            topRated[index]['title'] != null
-                                ? topRated[index]['title']
-                                : "Loading",
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.center,
+                        Text(
+                          topRated[index]['title'] ?? "Loading",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                       ],
                     ),

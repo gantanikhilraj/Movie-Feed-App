@@ -16,7 +16,7 @@ class Nowplaying extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Container(
+          SizedBox(
             height: 270,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -30,8 +30,10 @@ class Nowplaying extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) => Description(
                           name: nowplaying[index]['title'],
+                          // ignore: prefer_interpolation_to_compose_strings
                           bannerUrl: 'https://image.tmdb.org/t/p/w500' +
                               nowplaying[index]['backdrop_path'],
+                          // ignore: prefer_interpolation_to_compose_strings
                           posterUrl: 'https://image.tmdb.org/t/p/w500' +
                               nowplaying[index]['poster_path'],
                           description: nowplaying[index]['overview'],
@@ -41,7 +43,7 @@ class Nowplaying extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Container(
+                  child: SizedBox(
                     width: 140,
                     child: Column(
                       children: [
@@ -51,6 +53,7 @@ class Nowplaying extends StatelessWidget {
                             image: DecorationImage(
                               image: NetworkImage(
                                 nowplaying[index]['title'] != null
+                                    // ignore: prefer_interpolation_to_compose_strings
                                     ? 'https://image.tmdb.org/t/p/w500' +
                                         nowplaying[index]['poster_path']
                                     : 'https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg',
@@ -63,18 +66,14 @@ class Nowplaying extends StatelessWidget {
                         const SizedBox(
                           height: 5,
                         ),
-                        Container(
-                          child: Text(
-                            nowplaying[index]['title'] != null
-                                ? nowplaying[index]['title']
-                                : "Loading",
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.center,
+                        Text(
+                          nowplaying[index]['title'] ?? "Loading",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                       ],
                     ),
