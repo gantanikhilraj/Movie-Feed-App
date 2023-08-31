@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_recommendation_app/widgets/now_playing.dart';
 import 'package:movie_recommendation_app/widgets/toprated_movies.dart';
-import 'package:movie_recommendation_app/widgets/toprated_tv.dart';
 import 'package:movie_recommendation_app/widgets/trending_movies.dart';
 import 'package:movie_recommendation_app/widgets/upcoming.dart';
 import 'package:tmdb_api/tmdb_api.dart';
@@ -17,7 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List trendingMovies = [];
   List topratedMovies = [];
-  List topratedTv = [];
+  // List topratedTv = [];
   List upcomimg = [];
   List nowplayinglist = [];
   final String apikey = 'fe82242bc46fe1861236bcb1bb659808';
@@ -41,14 +40,14 @@ class _HomePageState extends State<HomePage> {
         // mediaType: MediaType.movie,
         );
     Map topratedmoviesresult = await tmdbWithCustomLogs.v3.movies.getTopRated();
-    Map topratedtvresult = await tmdbWithCustomLogs.v3.tv.getPopular();
     Map upcomingresult = await tmdbWithCustomLogs.v3.movies.getUpcoming();
     Map nowplaying = await tmdbWithCustomLogs.v3.movies.getNowPlaying();
+    // Map topratedtvresult = await tmdbWithCustomLogs.v3.tv.getPopular();
 
     setState(() {
+      // topratedTv = topratedtvresult['results'];
       trendingMovies = trendingresult['results'];
       topratedMovies = topratedmoviesresult['results'];
-      topratedTv = topratedtvresult['results'];
       upcomimg = upcomingresult['results'];
       nowplayinglist = nowplaying['results'];
     });
@@ -61,31 +60,34 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        title: const Text("Movie Recommendation App"),
-      ),
-      body: ListView(
-        children: [
-          // TopratedTv(Tv: topratedTv),
-          UpcomingMovies(upcoming: upcomimg),
-          TopratedMovies(topRated: topratedMovies),
-          TrendingMovies(trending: trendingMovies),
-          Nowplaying(nowplaying: nowplayinglist),
-          const Center(
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 10),
-              child: Text(
-                "Show More",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-          ),
-        ],
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          title: const Text("🎬 Movie Feed"),
+          backgroundColor: Colors.blueAccent[400],
+        ),
+        body: ListView(
+          children: [
+            // TopratedTv(Tv: topratedTv),
+            UpcomingMovies(upcoming: upcomimg),
+            Nowplaying(nowplaying: nowplayinglist),
+            TopratedMovies(topRated: topratedMovies),
+            TrendingMovies(trending: trendingMovies),
+            // const Center(
+            //   child: Padding(
+            //     padding: EdgeInsets.only(bottom: 10),
+            //     child: Text(
+            //       "Show More",
+            //       style: TextStyle(
+            //         color: Colors.white,
+            //         fontSize: 20,
+            //       ),
+            //     ),
+            //   ),
+            // ),
+          ],
+        ),
       ),
     );
   }

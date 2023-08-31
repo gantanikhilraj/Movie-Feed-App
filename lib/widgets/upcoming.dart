@@ -12,18 +12,18 @@ class UpcomingMovies extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Upcoming Movies",
             style: TextStyle(color: Colors.white),
           ),
           const SizedBox(
             height: 10,
           ),
-          Container(
+          SizedBox(
             height: 200,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: upcoming.length != null ? upcoming.length : 0,
+              itemCount: upcoming.length,
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
@@ -33,8 +33,10 @@ class UpcomingMovies extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) => Description(
                           name: upcoming[index]['title'],
+                          // ignore: prefer_interpolation_to_compose_strings
                           bannerUrl: 'https://image.tmdb.org/t/p/w500' +
                               upcoming[index]['backdrop_path'],
+                          // ignore: prefer_interpolation_to_compose_strings
                           posterUrl: 'https://image.tmdb.org/t/p/w500' +
                               upcoming[index]['poster_path'],
                           description: upcoming[index]['overview'],
@@ -57,6 +59,7 @@ class UpcomingMovies extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                             image: DecorationImage(
                                 image: NetworkImage(
+                                  // ignore: prefer_interpolation_to_compose_strings
                                   'https://image.tmdb.org/t/p/w500' +
                                       upcoming[index]['backdrop_path'],
                                 ),
@@ -66,18 +69,14 @@ class UpcomingMovies extends StatelessWidget {
                         const SizedBox(
                           height: 5,
                         ),
-                        Container(
-                          child: Text(
-                            upcoming[index]['title'] != null
-                                ? upcoming[index]['title']
-                                : "Loading",
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.center,
+                        Text(
+                          upcoming[index]['title'] ?? "Loading",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                       ],
                     ),
