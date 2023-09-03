@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:movie_recommendation_app/model/menu_item.dart';
+import 'package:movie_recommendation_app/screens/report_screen.dart';
+import 'package:movie_recommendation_app/widgets/menu_items.dart';
 import 'package:movie_recommendation_app/widgets/now_playing.dart';
 import 'package:movie_recommendation_app/widgets/toprated_movies.dart';
 import 'package:movie_recommendation_app/widgets/trending_movies.dart';
 import 'package:movie_recommendation_app/widgets/upcoming.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 // import 'package:movie_recommendation_app/utils/text_data.dart';
 
@@ -64,8 +68,16 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
+          actions: [
+            PopupMenuButton<MenuItem>(
+              onSelected: (item) => onSelected(context, item),
+              itemBuilder: (context) => [
+                ...MenuItems.items.map(buildItem).toList(),
+              ],
+            )
+          ],
           title: const Text("🎬 Movie Feed"),
-          backgroundColor: Colors.blueAccent[400],
+          backgroundColor: Colors.blueAccent[300],
         ),
         body: ListView(
           children: [
@@ -90,5 +102,40 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  PopupMenuItem<MenuItem> buildItem(MenuItem item) => PopupMenuItem(
+        value: item,
+        child: Row(
+          children: [
+            Icon(
+              item.icon,
+              color: Colors.black,
+            ),
+            const SizedBox(
+              width: 12,
+            ),
+            Text(
+              item.title,
+              style: const TextStyle(color: Colors.black),
+            ),
+          ],
+        ),
+      );
+  void onSelected(BuildContext context, MenuItem item) {
+    switch (item) {
+      case MenuItems.reportItem:
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => Reportbug(),
+          ),
+        );
+        break;
+      case MenuItems.shareItem:
+        const url = 'https://moviefeedapp.web.app/';
+        Share.share(
+            'Explore the Latest Blockbusters 🎥, Highest-Rated Films 🌟, and Exciting Upcoming Releases 🚀 in the world of cinema! 🍿🎬🌟 at :$url');
+        break;
+    }
   }
 }
