@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_recommendation_app/description.dart';
+import 'package:movie_recommendation_app/model/description.dart';
 
 class UpcomingMovies extends StatelessWidget {
   final List upcoming;
