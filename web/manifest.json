@@ -1,6 +1,6 @@
 {
-    "name": "movie_recommendation_app",
-    "short_name": "movie_recommendation_app",
+    "name": "Movie Feed App",
+    "short_name": "Movie Feed App",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
