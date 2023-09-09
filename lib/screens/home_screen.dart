@@ -132,7 +132,7 @@ class _HomePageState extends State<HomePage> {
         );
         break;
       case MenuItems.shareItem:
-        const url = 'https://moviefeedapp.web.app/';
+        const url = 'https://openinapp.co/yasiy';
         Share.share(
             'Explore the Latest Blockbusters 🎥, Highest-Rated Films 🌟, and Exciting Upcoming Releases 🚀 in the world of cinema! 🍿🎬🌟 at :$url');
         break;
