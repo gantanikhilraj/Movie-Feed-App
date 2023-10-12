@@ -15,6 +15,16 @@ class Description extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Movie Description"),
+        backgroundColor: Colors.black,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       backgroundColor: Colors.black,
       body: ListView(
         children: [
