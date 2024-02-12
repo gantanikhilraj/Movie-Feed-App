@@ -1,4 +1,4 @@
-# Movie-Feed-App : Find the latest, top-rated, and upcoming movies
+# Movie-Feed-App : Find the latest, top-rated, and upcoming movies list
 
 
 " Explore the Latest Blockbusters 🎥, Highest-Rated Films 🌟, and Exciting Upcoming Releases 🚀 in the world of cinema! 🍿🎬🌟  "
